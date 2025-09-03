@@ -35,7 +35,7 @@ Step 1: Creating a free Azure Account <br />
 
 visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/8357c7ba-4344-4531-80ce-0abdc61c258d)
+![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134318.png)
 
 
 
@@ -58,7 +58,7 @@ visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 
 
 Subscription can be done either with the outlook or GitHub account. The form should be filled as per the requirement and there will be window showing No automatic charges and Azure will be asking for continuation of the service after the end of credit. 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/a63c6634-aae2-43d1-a852-4389a632aed5)
+![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134642.png)
 
 
 
@@ -73,7 +73,7 @@ Subscription can be done either with the outlook or GitHub account. The form sho
 
 Once the sign up process gets complete, we will get directed to the dashboard of Azure.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/6eb050b4-675c-4832-90cd-94ea8319ed76)
+![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134650.png)
 
 
 
