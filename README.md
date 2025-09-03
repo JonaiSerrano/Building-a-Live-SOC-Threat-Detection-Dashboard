@@ -59,7 +59,7 @@ visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 
 Subscription can be done either with the outlook or GitHub account. The form should be filled as per the requirement and there will be window showing No automatic charges and Azure will be asking for continuation of the service after the end of credit. 
 
-![Screenshot](Pictures/Screenshot%202025-09-03%20134318.png)
+![Screenshot](assets/Screenshot 2025-09-03 134642.png)
 
 
 
