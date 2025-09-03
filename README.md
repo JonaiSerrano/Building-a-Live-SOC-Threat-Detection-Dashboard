@@ -36,7 +36,7 @@ Major steps on this project:
 visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
 
 
-![Screenshot](Pictures/Screenshot%202025-09-03%20134318.png)
+![Screenshot](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134318.png)
 
 
 
