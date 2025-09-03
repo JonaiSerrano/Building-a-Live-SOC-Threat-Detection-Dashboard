@@ -37,6 +37,7 @@ visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 
 ![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134318.png)
 
+![Screenshot](Pictures/Screenshot%202025-09-03%20134318.png)
 
 
 
