@@ -86,9 +86,9 @@ Once the sign up process gets complete, we will get directed to the dashboard of
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
 Then in the search bar type: Resource Group.
 
-*An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
+In azure, a Resource Group is a logical grouping of resources that share the same lifespan. So everything we do in the lab will be under this unified group. It will make things easier to delete later.
 
-Go to create and click on Azure virtual Machine.
+  - *<ins>An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
 
 ![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20135618.png)
 
