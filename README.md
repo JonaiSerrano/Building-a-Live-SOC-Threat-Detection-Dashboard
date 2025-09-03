@@ -80,11 +80,11 @@ Once the sign up process gets complete, we will get directed to the dashboard of
 
 
 
-Step 2: Creation of virtual Machine <br />
+Step 2: Creation of Resource Group <br />
 
-To create the virtual machine, first visit the site: https://portal.azure.com/#home
-Then in the search bar type: virtual machine.
-This machine will be exposed to the internet for our experiment. Go to create and click on Azure virtual Machine.
+To create the Resource Group, first visit the site: https://portal.azure.com/#home
+Then in the search bar type: Resource Group.
+An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage—so they can be deployed, monitored, and controlled as a unified unit. Go to create and click on Azure virtual Machine.
 
 ![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/a62df6ca-3712-4e26-87ec-4a2c8e41707c)
 
@@ -102,7 +102,8 @@ This machine will be exposed to the internet for our experiment. Go to create an
 
 
 
-After that, there will be a form to fill up for the creation of virtual machine. Select the subscription base as Pay-As-You-Go. Remember that we need to delete everything after the completion of the lab so that there won’t be anything used by us in azure to make us pay later.
+Once you find yourself in the resource group section, click on create.
+
 
 In the resource group section, we need to create a new resource group. In azure, resource group is logical grouping of resources in azure that shares the same lifespan. So everything we do in the lab will be under this resource group. It will make things easier to even delete later.
 
