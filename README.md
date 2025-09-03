@@ -30,7 +30,7 @@ Major steps on this project:
 <br />
 
 
-Step 1: Creating a free Azure Account <br />
+<ins>Step 1:<ins> Creating a free Azure Account <br />
 
 
 visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
@@ -58,6 +58,7 @@ visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 
 
 Subscription can be done either with the outlook or GitHub account. The form should be filled as per the requirement and there will be window showing No automatic charges and Azure will be asking for continuation of the service after the end of credit. 
+
 ![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134642.png)
 
 
@@ -80,13 +81,16 @@ Once the sign up process gets complete, we will get directed to the dashboard of
 
 
 
-Step 2: Creation of Resource Group <br />
+<ins>Step 2:<ins> Creation of Resource Group <br />
 
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
 Then in the search bar type: Resource Group.
-An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage—so they can be deployed, monitored, and controlled as a unified unit. Go to create and click on Azure virtual Machine.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/a62df6ca-3712-4e26-87ec-4a2c8e41707c)
+*An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
+
+Go to create and click on Azure virtual Machine.
+
+![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20135618.png)
 
 
 
@@ -184,7 +188,7 @@ Click review and create.
 
 
 
-Step 3: Creation of Log Analytic Work space. <br />
+<ins>Step 3:<ins> Creation of Log Analytic Work space. <br />
 
 We go to search box and type Log Analytics Workspace. In this workspace, we will be ingesting logs from the virtual machine. We will be creating geographic custom logs to find out where the attacks are coming from. Click on create log analytic workspace.
 
@@ -222,7 +226,8 @@ And make sure to choose the same resource group that has been created from the S
 
 
 
-Step 4: Enabling ability to gather log from the virtual machine. <br />
+<ins>Step 4:<ins> Enabling ability to gather log from the virtual machine. <br />
+
 Go to search box, search and click on Microsoft Defender for Cloud>  and then click on environment setting on the left bar. We will see the SIEMLog, the log workspace that we have created previously.
 
 ![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/c477ddf1-d3cc-478c-b971-e1969b832263)
@@ -261,7 +266,7 @@ Then we need to go back to the log analytic workspace to connect it to the virtu
 
 
 
-Step 5: Setting up Sentinel <br />
+<ins>Step 5:<ins> Setting up Sentinel <br />
 
 Go to search box like before and choose Microsoft Sentinel. Click on create and choose the log workspace from the list.
 
@@ -270,7 +275,7 @@ Go to search box like before and choose Microsoft Sentinel. Click on create and 
 
 
 
-Step 6: Remote login to the virtual machine <br />
+<ins>Step 6:<ins> Remote login to the virtual machine <br />
 
 First go the search box and we need to open our virtual machine to get its IP address. Open it and we will be able to see the Public IP address on the right side of the screen.
 
@@ -380,7 +385,7 @@ Now virtual machine is running remotely in our desktop with Microsoft edge setup
 
 
 
-Step 7: Viewing Logs remotely <br />
+<ins>Step 7:<ins> Viewing Logs remotely <br />
 
 Go to start menu on your virtual machine and type Event viewer.
 Under event viewer wizard, go to Windows Logs> Security
@@ -467,7 +472,7 @@ We can also find the IP address on the bottom of this detail section. The IP of 
 
 
 
-Step 8: Making Virtual Machine more vulnerable to collect more data of potential attackers. <br />
+<ins>Step 8:<ins> Making Virtual Machine more vulnerable to collect more data of potential attackers. <br />
 
 For this step, we will be turning off the windows defender firewall. For that just type wf.msc in the start menu of the virtual machine. > click on Windows Defender Firewall Properties. And turn the firewall state off.
 
@@ -488,7 +493,8 @@ Also turn private and public profile also off.
 
 
 
-Step 9: Powershell scrpting in Virtual machine <br />
+<ins>Step 9:<ins> Powershell scrpting in Virtual machine <br />
+
 Powershell scripting to get information of security events Pass it to the API of geo location site and then use the output information from that site to put in Sentinel for graphic visualization of attacks.
 
 Here is the PowerShell Script to get API key from ipgeoloaction.io
@@ -671,7 +677,7 @@ We can see that by running the script and looking in the Users of C: of the virt
 ![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/5d18e6bd-3aac-4ee9-b8ae-37ff7508c2e8)
 
 
-Step 10: Creation of Custom Log under our Azure Log Analytic Workspace <br />
+<ins>Step 10:<ins> Creation of Custom Log under our Azure Log Analytic Workspace <br />
 
 Go to azure back again, go to log analytic work space and choose your workspace. SIEM in our case. And go to tables and then create sample log and then click create sample log. Choose MMA-based and then select the log file from your virtual machine. Since we are using our real machine to do this, we can copy and paste the content of our log file and save it in notepad of our own machine. To get the data. We need to save the file as failure.log.
 
@@ -698,7 +704,7 @@ And then save your custom log.
 
 
 
-Step 11: Viewing the logs <br />
+<ins>Step 11:<ins> Viewing the logs <br />
 
 Now you can simply go to search tab under the log workspace and view logs by clicking on logs> Then run a query according to the need. For example to view the failed attempts of login, we can simply do this query: SecurityEvent | where EventID == 4625
 
@@ -732,7 +738,8 @@ Now you can simply go to search tab under the log workspace and view logs by cli
 
 
 
-Step 12: Data extraction and Training <br />
+<ins>Step 12:<ins> Data extraction and Training <br />
+
 For data extraction, we need latitude, longitude, username from all the detail information that are available in the log details. But all the log details have same format, so we can extract the information based upon the patterns of the data. To do that, 
 expand one of the log, right click and choose extract data.
 
@@ -769,7 +776,7 @@ We can now wait for the attackers to attack in our system to get more data for t
 
 
 
-Step 13: Setting up Map in Sentinel. <br />
+<ins>Step 13:<ins> Setting up Map in Sentinel. <br />
 We go to portal.azure.com
 then Microsoft Sentinel and open the virtual machine here.
 The dashboard of Sentinel gets open where we can see the overview of security events that happen in our virtual machine of azure.
@@ -882,7 +889,8 @@ Now we can wait for days or weeks to collect a lot of data and enjoy watching th
 The project is complete, we can always see the unauthorized login attempt access to our virtual machine and point out the location from where the attempt is done.
 
 
-Step 14: Deleting resource group (Save your money :D) <br />
+<ins>Step 14:<ins> Deleting resource group (Save your money :D) <br />
+
 Now it's time to delete the resource group so there won’t be continuous charge going on which will end our free credit of $200 and azure will start charging via our credit card.
 
 For that, just go to search box, type resource group and delete the created resource group in it.
