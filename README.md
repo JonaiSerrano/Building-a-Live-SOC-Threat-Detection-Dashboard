@@ -419,7 +419,7 @@ Then you need to upload a special .csv file
   - This file contains over 55 thousand IP address locations.
   - This will allow us to map every attack that comes in on a map.
 
-You can find the file in my Repository under the ".csv File" folder
+<u>You can find the file in my Repository under the ".csv File" folder<u>
 
 Choose "network" as the SearchKey
 
@@ -431,43 +431,78 @@ Once again choose, *Review + Create*
 <h3>It will take about 10 minutes for all 55k lines to be read by Sentinel</h3>
 <h3>Refresh till you see that there are 55K Watchlist items</h3>
 
-To do that, 
-expand one of the log, right click and choose extract data.
+<br />
+<hr>
 
-Or by running this query
+<ins>Step 12:<ins> Watchlist Queries<br />
 
-    Failed_RDP_Geolocation_CL | parse RawData with * "latitude:" Latitude ",longitude:" Longitude ",destinationhost:" DestinationHost ",username:" Username ",sourcehost:" Sourcehost ",state:" State ", country:" Country ",label:" Label ",timestamp:" Timestamp | project Latitude,     Longitude, DestinationHost, Username, Sourcehost, State, Country, Label, Timestamp
+Using the following KQL table date to reference the Watchlist we created
+<br />
+<code>SecurityEvent _GetWatchlist("geoip")</code>
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20013720.png?raw=true)
 
+As you can see above, we are now mapping IP addresses to actual Countries and even Cities. All the parameters we specified are working as intended.
+  - Use as many combinations as you'd like to get more specific logs.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/5cc844f6-8fdf-45a4-86d2-0db53369fe20)
+<br />
+<hr>
 
+<ins>Step 13:<ins> Microsoft Sentinel Workbook/Map<br />
 
+Navigate to Sentinel and find the "Threat Management" drop-down and select "Workbooks"
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20014107.png?raw=true)
 
+Default widgets will appear initially. You can remove them by clicking the three dots on each widget and selecting "Remove".
 
+On the drop-down section to the left under "Add" choose "Add query"
 
-
-
-
-
-We can now wait for the attackers to attack in our system to get more data for the work.
-
-
-
-
-
-
-
-
-
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20014312.png?raw=true)
 
 
+Then choose "Advanced Editor"
+  - Erease all the code inside
+    - Paste the JSON underneath inside
 
+  # 
+	{"type": 3,
+	"content": {
+	"version": "KqlItem/1.0",
+	"query": "let GeoIPDB_FULL = _GetWatchlist(\"geoip\");\nlet WindowsEvents = SecurityEvent;\nWindowsEvents | where EventID == 4625\n| order by TimeGenerated desc\n| evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network)\n| summarize FailureCount = count() by IpAddress, latitude, longitude, cityname, countryname\n| project FailureCount, AttackerIp = IpAddress, latitude, longitude, city = cityname, country = countryname,\nfriendly_location = strcat(cityname, \" (\", countryname, \")\");",
+	"size": 3,
+	"timeContext": {
+		"durationMs": 2592000000
+	},
+	"queryType": 0,
+	"resourceType": "microsoft.operationalinsights/workspaces",
+	"visualization": "map",
+	"mapSettings": {
+		"locInfo": "LatLong",
+		"locInfoColumn": "countryname",
+		"latitude": "latitude",
+		"longitude": "longitude",
+		"sizeSettings": "FailureCount",
+		"sizeAggregation": "Sum",
+		"opacity": 0.8,
+		"labelSettings": "friendly_location",
+		"legendMetric": "FailureCount",
+		"legendAggregation": "Sum",
+		"itemColorSettings": {
+		"nodeColorField": "FailureCount",
+		"colorAggregation": "Sum",
+		"type": "heatmap",
+		"heatmapPalette": "greenRed"
+		}
+	}
+	},
+	"name": "query - 0"}
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20014905.png?raw=true)
 
 
 <ins>Step 13:<ins> Setting up Map in Sentinel. <br />
+
 We go to portal.azure.com
 then Microsoft Sentinel and open the virtual machine here.
 The dashboard of Sentinel gets open where we can see the overview of security events that happen in our virtual machine of azure.
