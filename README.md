@@ -28,6 +28,7 @@ Major steps on this project:
 4. Enable Azure Sentinel (SIEM) to begin monitoring and analyzing security events
 5. Use PowerShell scripting to extract logs from the VM and forward them to the Log Analytics Workspace. The script also sends log details to a geolocation API to retrieve latitude and longitude data, allowing real-time mapping of attack sources on a global visualization dashboard.
 <br />
+<hr>
 
 
 <ins>Step 1:<ins> Creating a free Azure Account <br />
@@ -75,13 +76,13 @@ Subscription can be done either with the outlook or GitHub account. The form sho
 Once the sign up process gets complete, we will get directed to the dashboard of Azure.
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134642.png)
+<hr>
 
 
 
 
 
-
-<ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Group</a>
+<ins>Step 2: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Group</a>
 
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
 Then, in the search bar type: Resource Group.
@@ -121,7 +122,7 @@ Select Review+Create. No need to change anything
 Here is what it should look like once created
 
 <img width="2233" height="1069" alt="image" src="https://github.com/user-attachments/assets/0aff1f43-5d88-4314-bc0d-caa7c7296684" />
-
+<hr>
 
 <ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network</a>
 
@@ -140,7 +141,7 @@ Next make sure the subscription stays the same and for the resource group choose
 After that you can skip the other sections and select Review+Create
 
 <img width="161" height="46" alt="image" src="https://github.com/user-attachments/assets/0c7c4b31-6629-4798-ab84-e954fb2a4bbf" />
-
+<hr>
 
 <ins>Step 4: Creation of <a href="https://azure.microsoft.com/en-us/products/virtual-machines">Virtual Machine</a>
 
@@ -175,10 +176,8 @@ Disable boot diagnostics in the monitoring tab
 The final step in the networking tab, we want the firewall to be the weakest and most open part of the network. That way attackers from around the world will try to break in, giving us plenty of data to study later.
 
 In the NIC settings, there's an option to go with a more detailed setup. If we choose that and start fresh, we’ll see a basic set of rules for incoming traffic that we can adjust to fit our plan.
-
-There we can see the default rule setup for the inbound traffic.
-
-Remove that default inbound rule.
+  - There we can see the default rule setup for the inbound traffic.
+  - Remove that default inbound rule.
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231619.png?raw=true)
 
@@ -194,6 +193,7 @@ After all this, we are in the clear!
 Click review and create. FIRE UP THE MACHINE!!!
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231625.png?raw=true)
+<hr>
 
 
 
@@ -204,172 +204,38 @@ Click review and create. FIRE UP THE MACHINE!!!
 
 
 
+<ins>Step 5: <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/windows/connect-rdp">Remote Login</a> to the virtual machine
 
-<ins>Step 3:<ins> Creation of Log Analytic Work space. <br />
 
-We go to search box and type Log Analytics Workspace. In this workspace, we will be ingesting logs from the virtual machine. We will be creating geographic custom logs to find out where the attacks are coming from. Click on create log analytic workspace.
+Start by navigating to the search box inside Azure and open your virtual machine. Once it's launched, you'll find the Public IP address displayed on the right-hand side of the screen.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/d7482b80-f14a-47a1-a346-dfba3d56b333)
 
 
 
-And make sure to choose the same resource group that has been created from the SIEM lab.
+On your computer, click on the start menu> and go to Remote Desktop Connection
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20233656.png?raw=true)
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/06ef08fb-23d5-469a-a81f-8e1f13f9f960)
 
+Type in the public IP of the virtual machine created in azure. 
 
 
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20233729.png?raw=true)
 
 
 
 
+Remember the username and password that you created on the VM? Now it's time to put it to use.
 
+Then accept the certification, and the computer will get connected to the virtual machine.
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<ins>Step 4:<ins> Enabling ability to gather log from the virtual machine. <br />
-
-Go to search box, search and click on Microsoft Defender for Cloud>  and then click on environment setting on the left bar. We will see the SIEMLog, the log workspace that we have created previously.
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/c477ddf1-d3cc-478c-b971-e1969b832263)
-
-
-
-
-
-
-
-
-
-
-Click on the workspace, and then turn Foundational CSPM on and leave servers on and SQL servers on machine turned off.
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/4378a5e7-53fb-4f73-a973-a116e675d8fd)
-
-
-
-
-
-On the left bar, click on data collection and save it.
-
-And go to data collection on the left. Where we need to choose all events. And then again save it using the save button on the top.
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/0a805724-0e62-4f05-a858-37676b3eb09d)
-
-
-
-Then we need to go back to the log analytic workspace to connect it to the virtual machine. Click on the log workspace and then we can see the virtual machine option in the middle tab. Click it, choose the one created for this project and then click connect.
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/89486a94-5bbd-4081-b43a-2521d4bb0496)
-
-
-
-
-<ins>Step 5:<ins> Setting up Sentinel <br />
-
-Go to search box like before and choose Microsoft Sentinel. Click on create and choose the log workspace from the list.
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/46395492-e270-4fbb-80ec-35d09413ba7c)
-
-
-
-
-<ins>Step 6:<ins> Remote login to the virtual machine <br />
-
-First go the search box and we need to open our virtual machine to get its IP address. Open it and we will be able to see the Public IP address on the right side of the screen.
-
-
-
-
-
-Click on start menu> go to remote desktop connection
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/7dc7e5e6-54f6-4155-b5bd-e7311d9b3496)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Now type the public ip of the virtual machine created in azure in there. 
-
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/b56f7a6b-8c7c-4d8d-9023-a1b539c259d2)
-
-
-
-
-
-
-
-
-
-
-
-Now you need to put the username and password that you have created on the VM at the time of its first creation.
-
-Then we need to accept the certification and the computer will get connected to the virtual machine on azure.
-
-
-
-
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/267741bc-e2cd-418f-ae54-27464db0784e)
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20233740.png?raw=true)
 
 
 
