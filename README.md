@@ -11,7 +11,7 @@ This is a demonstration project showcasing live cyber attack tracking and visual
 
 <h2>Environments Used </h2>
 
-- <b>Windows 10</b> (21H2)
+- <b>Windows 10 Pro N</b> (22H2 x64 Gen2)
 - <b>Azure</b>
 - <b>Microsoft Sentinel</b>
 - <b>API ipgeolocation.io</b>
@@ -84,9 +84,9 @@ Once the sign up process gets complete, we will get directed to the dashboard of
 <ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Group</a>
 
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
-Then in the search bar type: Resource Group.
+Then, in the search bar type: Resource Group.
 
-In azure, a Resource Group is a logical grouping of resources that share the same lifespan. So everything we do in the lab will be under this unified group. It will make things easier to delete later.
+In Azure, a Resource Group is a logical grouping of resources that share the same lifespan. So everything we do in the lab will be under this unified group. It will make things easier to delete later.
 
   - *<ins>An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
 
@@ -120,7 +120,7 @@ Make sure to choose the correct subscription. You should only have one at this p
 
 </p>Since we are simulating a complete enviornment we need to create a Virtual Network as well.</p>
  <ul>
-<li>Think of this as your home or office network, like a router gateway to connect you to the Internet.</li>
+<li>Think of this as a subnet for a home or office network, like a router gateway to connect you to the Internet.</li>
 <li>This will allow our VMs to plug into it just like a regular network.</li>
     </ul>
 
@@ -134,27 +134,37 @@ INSERT PICTURE
 
 After that you can skip the other sections and select Review+Create
 
-And we are going to use the Windows 10 Pro machine as it is one of the most generally and publicly used Operating system. 
+<ins>Step 4: Creation of <a href="https://azure.microsoft.com/en-us/products/virtual-machines">Virtual Machine</a>
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/c7dffa73-b139-47d9-9097-cb8013f45296)
+In the search bar, look up Virtual Machines or VM.
+Select the Create tab.
+
+INSERT PIC
+
+Choose the same resource group as before as well as Region. Name the VM however you'd like.
+
+We will be using a Windows 10 Pro Image, as it is one of the most widely used operating systems and perfect for this project.
+
+INSERT PICTURE
+
 
 
 
 Give a proper username and password. This username and password will be the login credential to this virtual machine later.
 
-For now, I am using username: SIEM and Password as per the requirement of password policy. 
+For now, I am using username: CORP and Password as per the requirement of password policy. 
 
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/1c975df8-b507-4600-a218-2cc1cab96861)
-
+INSERT PICTURE
 
 
 
 
 
-We leave everything else as default, check the confirmation and then next> next to networking.
+We leave everything else as default, check the confirmation and then next> next to the Networking tab.
 
-In the networking section, we need to define the firewall as the weakest and exposed one, so that attackers from all over the world will be attacking it, making a good picture for us to analyze at the end of this project.
+In the networking section, we need to first select the same Virtual Network.
+
+We now need to define the firewall as the weakest and most exposed one, so that attackers from all over the world will be attacking it, making a good picture for us to analyze at the end of this project.
 
 So, for that, 
 In the NIC network security group (this is firewall setting), we choose Advanced and click on create new.
