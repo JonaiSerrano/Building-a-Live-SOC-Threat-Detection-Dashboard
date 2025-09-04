@@ -160,6 +160,7 @@ We will be using a Windows 10 Pro Image, as it is one of the most widely used op
 
 
 Give a proper username and password. This username and password will be the login credential to this virtual machine later.
+  - *Write this down somewhere to not forget*
 
 For now, I am using username: CORP and Password as per the requirement of password policy. 
 
@@ -228,10 +229,7 @@ Type in the public IP of the virtual machine created in azure.
 
 Remember the username and password that you created on the VM? Now it's time to put it to use.
 
-Then accept the certification, and the computer will get connected to the virtual machine.
-
-
-
+Accept the certification pop-up, and the computer will establish a connection to the virtual machine.
 
 
 
@@ -240,32 +238,8 @@ Then accept the certification, and the computer will get connected to the virtua
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We can say no to everything as we won’t need them. After the window opens, go to start menu and setup Microsoft edge first as we will need to use it.
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/2b692962-493a-473f-82a1-df6bebe9dab1)
-
-
-
-
-Now virtual machine is running remotely in our desktop with Microsoft edge setup.
-
+Sucess! The Virtual Machine is running remotely through our desktop.
+<hr>
 
 
 <ins>Step 7:<ins> Viewing Logs remotely <br />
