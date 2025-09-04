@@ -1,4 +1,4 @@
-# Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-
+# Azure Sentinel SIEM: Building a Live Threat Detection Dashboard
 
 <h2>Description</h2>
 This is a demonstration project showcasing live cyber attack tracking and visualization. It leverages IP addresses along with geolocation data (latitude and longitude) to identify and map the origin of unauthorized login attempts targeting a deliberately vulnerable machine. The system under observation is a Windows 10 Pro virtual machine hosted in the Azure Cloud. <br />
@@ -8,6 +8,7 @@ This is a demonstration project showcasing live cyber attack tracking and visual
 
 - <b>PowerShell</b> 
 - <b>KQL</b>
+- <b>JSON</b>
 
 <h2>Environments Used </h2>
 
@@ -15,9 +16,9 @@ This is a demonstration project showcasing live cyber attack tracking and visual
 - <b>Azure</b>
 - <b>Microsoft Sentinel</b>
 - <b>Log Analytics workspaces</b>
-- <b>Resource Groups</b>
-- <b>Virtual Networks</b>
-- <b>Network security group</b>
+- <b>Windows Defender Firewall</b>
+- <b>Resource Manager</b>
+- <b>Event Viewer</b>
 
 <h2>Setup Walk Through</h2>
 
@@ -34,8 +35,7 @@ Major steps on this project:
 <hr>
 
 
-<ins>Step 1:<ins> Creating a free Azure Account <br />
-
+<h2>Step 1: Creating a free Azure Account</h2><br />
 
 Visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
 
