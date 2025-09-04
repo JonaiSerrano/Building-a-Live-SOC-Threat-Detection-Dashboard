@@ -33,7 +33,7 @@ Major steps on this project:
 <ins>Step 1:<ins> Creating a free Azure Account <br />
 
 
-visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
+Visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200 to perform this lab and many other projects inside Azure.
 
 
 ![Screenshot](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134318.png)
@@ -59,7 +59,7 @@ visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 
 Subscription can be done either with the outlook or GitHub account. The form should be filled as per the requirement and there will be window showing No automatic charges and Azure will be asking for continuation of the service after the end of credit. 
 
-![Screenshot](assets/Screenshot 2025-09-03 134642.png)
+![Screenshot](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134650.png)
 
 
 
@@ -74,14 +74,14 @@ Subscription can be done either with the outlook or GitHub account. The form sho
 
 Once the sign up process gets complete, we will get directed to the dashboard of Azure.
 
-![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20134650.png)
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134642.png)
 
 
 
 
 
 
-<ins>Step 2:<ins> Creation of Resource Group <br />
+<ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Group</a>
 
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
 Then in the search bar type: Resource Group.
@@ -90,7 +90,7 @@ In azure, a Resource Group is a logical grouping of resources that share the sam
 
   - *<ins>An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
 
-![image](https://github.com/JonaiSerrano/Assets-for-SIEM-Project-/blob/main/Screenshot%202025-09-03%20135618.png)
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20135618.png)
 
 
 
@@ -108,8 +108,31 @@ In azure, a Resource Group is a logical grouping of resources that share the sam
 
 Once you find yourself in the resource group section, click on create.
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20190721.png?raw=true)
 
-In the resource group section, we need to create a new resource group. In azure, resource group is logical grouping of resources in azure that shares the same lifespan. So everything we do in the lab will be under this resource group. It will make things easier to even delete later.
+Make sure to choose the correct subscription. You should only have one at this point to choose from. From there you can name the group however you'd like.
+
+*Ideally choose the same region for everything you create. Helps everything run smoother with lower latency.*
+
+<img width="1027" height="517" alt="image" src="https://github.com/user-attachments/assets/30978f26-9bdf-48d0-9e44-7eca0d1193f1" />
+
+<ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network</a>
+
+</p>Since we are simulating a complete enviornment we need to create a Virtual Network as well.</p>
+ <ul>
+<li>Think of this as your home or office network, like a router gateway to connect you to the Internet.</li>
+<li>This will allow our VMs to plug into it just like a regular network.</li>
+    </ul>
+
+Type in Virtual Networks on the search bar and when prompted, select the <B>Create Virtual Network<B> button
+
+INSERT PICTURE
+
+Next make sure the subscription stays the same and for the resource group choose the one you just created.
+
+INSERT PICTURE
+
+After that you can skip the other sections and select Review+Create
 
 And we are going to use the Windows 10 Pro machine as it is one of the most generally and publicly used Operating system. 
 
