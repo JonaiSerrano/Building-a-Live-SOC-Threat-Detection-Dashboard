@@ -318,12 +318,12 @@ On Azure's homepage, search for *Sentinel*
 
 Select the *+ Create Microsoft Sentinel* button
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20003031.png?raw=true)
 
 Choose your workplace and select the *Add* button on the bottom right to incorporate Sentinel into your Log Analytics Workspace.
   - This is allowing all the logs to be fed directly to Sentinel for us to access them through the SIEM.
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20002811.png?raw=true)
 
 <br />
 <hr>
@@ -336,50 +336,98 @@ Access Sentinel and navigate to the *Content Management* drop-down on the left.
 Search for "Windows Security Events" and install.
   - Make sure that ALL the individual sections install!
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20003729.png?raw=true)
 
 Once it installs, we are going to add a solution. 
 
 Click on the "Manage" button on the bottom right of the page.
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20004318.png?raw=true)
 
 Once inside, click on "Windows Security Events via AMA"
   - *This connection enables you to view dashboards, create custom alerts, and improve investigation.*
 
 Click "Open connector page"
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20004509.png?raw=true)
 
 Select "Data Collection Rule"
   - Used by the VM to forward logs into the Log Analytics Workspace, which in turn lets us use it in our SIEM.
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20004856.png?raw=true)
 
 Choose whatever rule name your heart desires.
   - *Make sure to choose the same Resource Group (Same old Same old)*
 
-INSERT
-
 Select your VM
   - You might have to click "Azure subscription 1", then the name of your Resource group, and finally your VM
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20005212.png?raw=true)
 
 On the "Collect" page you can leave it to collect "All Security Events"
 
 Finally, *Review + Create*
 
+INSERT
+
+<br />
+<hr>
+
+<ins>Step 11: Viewing and Querying Logs</a>
+
+
+Go to the search tab in the log workspace and click on "Logs" to view them. Then run a query based on your needs—for instance, to see failed login attempts
+
+INSERT
+
+We are given a KQL console where we can use scripts like the following to grab logs.
+
+  - Examples
+    - <code>SecurityEvent | where EventID == 4625. | project TimeGenerated, Account, Computer, EventID, IpAddress</code>
+    - <code>let GeoIPDB_FULL = _GetWatchlist("geoip");
+let WindowsEvents = SecurityEvent
+    | where IpAddress == <attacker IP address>
+    | where EventID == 4625
+    | order by TimeGenerated desc
+    | evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
+WindowsEvents</code>
+
+
+INSERT X2
 
 
 
-Now you can simply go to search tab under the log workspace and view logs by clicking on logs> Then run a query according to the need. For example to view the failed attempts of login, we can simply do this query: SecurityEvent | where EventID == 4625
+<ins>Step 12:<ins> Data Extraction and Mapping <br />
+
+To map out and extract data, we need latitude, longitude, usernames, and IP's from the log details. Since all logs follow the same format, we can identify and retrieve this information using consistent data patterns.
+
+Commence by opening up Sentinel and navigating to the "Configuration" drop-down and selecting *Watchlist*
+
+From there, select Add New.
+
+INSERT
+
+Name it "geoip" as well as the alias "geoip"
+
+INSERT
+
+Then you need to upload a special .csv file 
+  - This file contains over 55 thousand IP address locations.
+  - This will allow us to map every attack that comes in on a map.
+
+You can find the file in my Repository under the ".csv File" folder
+
+Choose "network" as the SearchKey
+
+Once again choose, *Review + Create*
+
+INSERT!!!
 
 
+<h3>It will take about 10 minutes for all 55k lines to be read by Sentinel</h3>
+<h3>Refresh till you see that there are 55K Watchlist items</h3>
 
-<ins>Step 12:<ins> Data extraction and Training <br />
-
-For data extraction, we need latitude, longitude, username from all the detail information that are available in the log details. But all the log details have same format, so we can extract the information based upon the patterns of the data. To do that, 
+To do that, 
 expand one of the log, right click and choose extract data.
 
 Or by running this query
