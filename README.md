@@ -43,37 +43,9 @@ Visit: https://azure.microsoft.com/en-us/free/  all new users will be given $200
 ![Screenshot](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134318.png)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Subscription can be done either with the outlook or GitHub account. The form should be filled as per the requirement and there will be window showing No automatic charges and Azure will be asking for continuation of the service after the end of credit. 
 
 ![Screenshot](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20134650.png)
-
-
-
-
-
-
-
-
-
-
 
 
 Once the sign up process gets complete, we will get directed to the dashboard of Azure.
@@ -82,10 +54,7 @@ Once the sign up process gets complete, we will get directed to the dashboard of
 <hr>
 
 
-
-
-
-<ins>Step 2: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Group</a>
+<h2>Step 2: Creation of <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">Resource Groups</h2><br />
 
 To create the Resource Group, first visit the site: https://portal.azure.com/#home
 Then, in the search bar type: Resource Group.
@@ -95,19 +64,6 @@ In Azure, a Resource Group is a logical grouping of resources that share the sam
   - *<ins>An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20135618.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Once you find yourself in the resource group section, click on create.
@@ -128,7 +84,7 @@ Here is what it should look like once created
 <br />
 <hr>
 
-<ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network</a>
+<h2><ins>Step 3: Creating a <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network</a></h2><br />
 
 </p>Since we are simulating a complete environment we need to create a Virtual Network as well.</p>
  <ul>
@@ -147,7 +103,7 @@ After that you can skip the other sections and select *Review + Create*
 <img width="161" height="46" alt="image" src="https://github.com/user-attachments/assets/0c7c4b31-6629-4798-ab84-e954fb2a4bbf" />
 <hr>
 
-<ins>Step 4: Creation of <a href="https://azure.microsoft.com/en-us/products/virtual-machines">Virtual Machine</a>
+<h2>Step 4: Creating a <a href="https://azure.microsoft.com/en-us/products/virtual-machines">Virtual Machine</a></h2><br />
 
 In the search bar, look up Virtual Machines or VM.
 Select the Create tab.
@@ -209,7 +165,7 @@ Click *Review + Create*. FIRE UP THE MACHINE!!!
 
 
 
-<ins>Step 5: <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/windows/connect-rdp">Remote Login</a> to the virtual machine
+<h2>Step 5: <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/windows/connect-rdp">Remote Login</a> to the virtual machine</a></h2><br />
 
 
 Start by navigating to the search box inside Azure and open your virtual machine. Once it's launched, you'll find the Public IP address displayed on the right-hand side of the screen.
@@ -246,7 +202,7 @@ Sucess! The Virtual Machine is running remotely through our desktop.
 <hr>
 
 
-<ins>Step 6:<ins> Monitoring Logs Remotely <br />
+<h2>Step 6:<ins> Monitoring Logs Remotely</a></h2><br />
 
 While logged in on your VM navigate to the *Event Viewer* by searching for it in the start menu.
 Once it launches, navigate to *Windows Logs* and select the Security section. It may take a moment for all the security events to load under the "Number of events" tab. 
@@ -283,7 +239,7 @@ BAM!!! Here we can clearly see the audit failure. By clicking into it, we can ge
 <hr>
 
 
-<ins>Step 7:<ins> Making the VM intentionally less secure to monitor potential attack attempts. <br />
+<h2>Step 7:<ins> Making the VM intentionally less secure to monitor potential attack attempts.</a></h2><br />
 
 For this step, open the Start menu on the virtual machine and type <code>wf.msc</code> Click on Windows Defender Firewall Properties, then set the firewall state to Off.
   - *I know it feels weird, but this ensures we will be absolutely vulnerable to outside attacks!*
@@ -297,7 +253,7 @@ For this step, open the Start menu on the virtual machine and type <code>wf.msc<
 <hr>
 
 
-<ins>Step 8: Creating a<a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview">Log Analytic Workspace</a>
+<h2>Step 8: Creating a <a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview">Log Analytic Workspace</a></h2><br />
 
 On Azure's homepage, search for *Log Analytics Workspaces*
   - <b>*This is a tool that allows you to easily store, retain, and most importantly, query data collected from selected environments in Azure*<b>
@@ -315,7 +271,7 @@ Press *Review + Create*
 <hr>
 
 
-<ins>Step 9: Integrating Microsoft <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-sentinel">Sentinel</a>
+<h2>Step 9: Integrating Microsoft <a href="https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-sentinel">Sentinel</a></h2><br />
 
 On Azure's homepage, search for *Sentinel*
   - <b>*Microsoft Sentinel is a cloud-native SIEM and SOAR solution that uses AI, automation, and integrated threat intelligence to detect, investigate, and respond to security threats across your entire network*<b>
@@ -332,7 +288,7 @@ Choose your workplace and select the *Add* button on the bottom right to incorpo
 <br />
 <hr>
 
-<ins>Step 10: Connecting VMs, Log Analytics Workspace, and Sentinel to work together</a>
+<h2>Step 10: Connecting VMs, Log Analytics Workspace, and Sentinel to work together</a></h2><br />
 
 Access Sentinel and navigate to the *Content Management* drop-down on the left.
   - Select *Content Hub*
@@ -377,7 +333,7 @@ Finally, *Review + Create*
 <br />
 <hr>
 
-<ins>Step 11: Viewing and Querying Logs</a>
+<h2>Step 11: Viewing and Querying Logs</a></h2><br />
 
 
 Go to the search tab in the log workspace and click on "Logs" to view them. Then run a query based on your needs—for instance, to see failed login attempts
@@ -405,7 +361,7 @@ WindowsEvents</code>
 <br />
 <hr>
 
-<ins>Step 12:<ins> Data Extraction and Mapping <br />
+<h2>Step 12:<ins> Data Extraction and Mapping</a></h2><br />
 
 To map out and extract data, we need latitude, longitude, usernames, and IP's from the log details. Since all logs follow the same format, we can identify and retrieve this information using consistent data patterns.
 
@@ -438,7 +394,7 @@ Once again choose, *Review + Create*
 <br />
 <hr>
 
-<ins>Step 12:<ins> Watchlist Queries<br />
+<ins>Step 12:<ins> Watchlist Queries</a></h2><br />
 
 Using the following KQL table date to reference the Watchlist we created
 <br />
@@ -452,7 +408,7 @@ As you can see above, we are now mapping IP addresses to actual Countries and ev
 <br />
 <hr>
 
-<ins>Step 13:<ins> Microsoft Sentinel Workbook/Map<br />
+<h2>Step 13:<ins> Microsoft Sentinel Workbook/Map</a></h2><br />
 
 Navigate to Sentinel and find the "Threat Management" drop-down and select "Workbooks"
 
@@ -505,7 +461,7 @@ Then choose "Advanced Editor"
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20014905.png?raw=true)
 
 
-<ins>Step 13:<ins> Admire your work!<br />
+<h2>Step 14:<ins> Admire your work!</a></h2><br />
 
 You have successfully mapped out alerts from failed login attempts - EventID == 4625 - from around the world onto a tangible and visible map!
   - You can configure and change map settings to tailor to your needs and events you would like to monitor!
@@ -516,11 +472,11 @@ You have successfully mapped out alerts from failed login attempts - EventID == 
 
 The project is now successfully completed. We’ve set up a system that continuously monitors unauthorized login attempts to our virtual machine. Each failed access attempt is logged, allowing us to track and analyze the details—including identifying the geographic location of the source. This setup not only enhances visibility into potential threats but also provides valuable insights for strengthening future security measures.
 
-<ins>Step 14:<ins> "Optional" Deleting Resources (Don't go broke LOL) <br />
+<h2>Step 15:<ins> "Optional" Deleting Resources (Don't go broke LOL)</a></h2><br />
 
 Now it's time to delete the resource group so you don’t end up turning your free $200 Azure credit into an accidental subscription plan. 
 
-Just head to the search box, type “Resource Group,” find the one you created, and delete it—before Azure starts treating your credit card like a buffet.
+Just head to the search box, type “Resource Group,” find the one you created, and delete it before Azure starts treating your credit card like a buffet.
 
 It may take a little while for everything to be fully deleted. If you'd like to cancel the subscription entirely, just go to "All Services", open "Subscriptions," select the one you want to cancel, and hit "Cancel Subscription" easy cleanup, no strings attached.
 
