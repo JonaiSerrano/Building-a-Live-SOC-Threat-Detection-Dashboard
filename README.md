@@ -242,18 +242,17 @@ Sucess! The Virtual Machine is running remotely through our desktop.
 <hr>
 
 
-<ins>Step 7:<ins> Viewing Logs remotely <br />
+<ins>Step 6:<ins> Monitoring Logs Remotely <br />
 
-Go to start menu on your virtual machine and type Event viewer.
-Under event viewer wizard, go to Windows Logs> Security
- All the events will be loaded in some time under the Security Number of events tabs.
+While logged in on your VM navigate to the *Event Viewer* by searching for it in the start menu.
+Once it launches, navigate to *Windows Logs* and select the Security section. It may take a moment for all the security events to load under the "Number of events" tab. 
+  - *Imagine that someone tried to access your desktop but didn’t succeed. Go back to the Security section and locate the event that corresponds to this failed login. You’ll be able to view detailed information about the attempt in the event report.*
 
-Here, lets make a scenario of failure login (by typing wrong password) and recheck the Security events. Lets assume that someone tried to login to our desktop but failed and we will look the event report details.
+Let’s simulate a failed login attempt by entering an incorrect password. This is going to generate a new event in the Security log that we can go back and look at!
 
-To do that, from our home desktop, we will again open the remote desktop connection and put the IP address of our virtual machine. And try to login with wrong credentials. We will refresh the security events on the virtual machine and visualize the new failure login event.
+To do that, we will once again open the remote desktop connection and enter the IP address of our virtual machine. And try to log in with FALSE credentials. 
 
-
-
+  - We will refresh "security events" on the virtual machine and visualize the new failed login event.
 
 
 
