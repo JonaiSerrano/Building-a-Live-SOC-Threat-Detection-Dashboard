@@ -368,7 +368,7 @@ On the "Collect" page you can leave it to collect "All Security Events"
 
 Finally, *Review + Create*
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20010252.png?raw=true)
 
 <br />
 <hr>
@@ -378,7 +378,7 @@ INSERT
 
 Go to the search tab in the log workspace and click on "Logs" to view them. Then run a query based on your needs—for instance, to see failed login attempts
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20010541.png?raw=true)
 
 We are given a KQL console where we can use scripts like the following to grab logs.
 
@@ -393,9 +393,13 @@ let WindowsEvents = SecurityEvent
 WindowsEvents</code>
 
 
-INSERT X2
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20010909.png?raw=true)
+<hr>
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20011230.png?raw=true)
 
+<br />
+<hr>
 
 <ins>Step 12:<ins> Data Extraction and Mapping <br />
 
@@ -405,11 +409,11 @@ Commence by opening up Sentinel and navigating to the "Configuration" drop-down 
 
 From there, select Add New.
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20011617.png?raw=true)
 
 Name it "geoip" as well as the alias "geoip"
 
-INSERT
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20011824.png?raw=true)
 
 Then you need to upload a special .csv file 
   - This file contains over 55 thousand IP address locations.
@@ -421,7 +425,7 @@ Choose "network" as the SearchKey
 
 Once again choose, *Review + Create*
 
-INSERT!!!
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20012101.png?raw=true)
 
 
 <h3>It will take about 10 minutes for all 55k lines to be read by Sentinel</h3>
