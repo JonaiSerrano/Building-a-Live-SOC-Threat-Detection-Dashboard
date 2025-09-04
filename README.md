@@ -133,8 +133,6 @@ Here is what it should look like once created
 
 Type in Virtual Networks on the search bar and when prompted, select the <B>Create Virtual Network<B> button.
 
-![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20204032.png?raw=true)
-
 Next make sure the subscription stays the same and for the resource group choose the one you just created.
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20201515.png?raw=true)
@@ -149,14 +147,14 @@ After that you can skip the other sections and select Review+Create
 In the search bar, look up Virtual Machines or VM.
 Select the Create tab.
 
-INSERT PIC
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20204032.png?raw=true)
+
 
 Choose the same resource group as before as well as Region. Name the VM however you'd like.
 
 We will be using a Windows 10 Pro Image, as it is one of the most widely used operating systems and perfect for this project.
 
-INSERT PICTURE
-
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20204248.png?raw=true)
 
 
 
@@ -164,62 +162,38 @@ Give a proper username and password. This username and password will be the logi
 
 For now, I am using username: CORP and Password as per the requirement of password policy. 
 
-INSERT PICTURE
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20205237.png?raw=true)
 
+In the Networking tab, be sure to choose the correct Virtual Network and Subnet. And select the "Delete public IP" option.
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20230322.png?raw=true)
 
+Disable boot diagnostics in the monitoring tab
 
+<img width="679" height="127" alt="image" src="https://github.com/user-attachments/assets/790466fe-2485-4d73-aa6e-22867759031e" />
 
-We leave everything else as default, check the confirmation and then next> next to the Networking tab.
+The final step in the networking tab, we want the firewall to be the weakest and most open part of the network. That way attackers from around the world will try to break in, giving us plenty of data to study later.
 
-In the networking section, we need to first select the same Virtual Network.
+In the NIC settings, there's an option to go with a more detailed setup. If we choose that and start fresh, we’ll see a basic set of rules for incoming traffic that we can adjust to fit our plan.
 
-We now need to define the firewall as the weakest and most exposed one, so that attackers from all over the world will be attacking it, making a good picture for us to analyze at the end of this project.
-
-So, for that, 
-In the NIC network security group (this is firewall setting), we choose Advanced and click on create new.
 There we can see the default rule setup for the inbound traffic.
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/76626204-ceef-454b-8849-1e313586d126)
+Remove that default inbound rule.
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231619.png?raw=true)
 
+Now we can create a new rule for the project.
 
+In Destination port ranges, we put * to allow ALL ports. Protocol set to ANY to allow all the protocols. And lower the priority to 100.
+Name this rule anything you want.
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231955.png?raw=true)
 
+After all this, we are in the clear!
 
+Click review and create. FIRE UP THE MACHINE!!!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We need to remove that default inbound rule and create one. 
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/20d4c0bf-5792-4688-bf72-618a4d86f666)
-
-
-
-
-In Destination port ranges, we put * to allow all the ports. Protocol also Any to allow all the protocols. And lower the priority to 100.
-name this rule as anything you want, we put ALL_IN as a name for now, does not matter. So now we have setup the inbound rules for our virtual machine.
-
-Click review and create.
-
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231625.png?raw=true)
 
 
 
