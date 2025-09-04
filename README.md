@@ -114,25 +114,35 @@ Make sure to choose the correct subscription. You should only have one at this p
 
 *Ideally choose the same region for everything you create. Helps everything run smoother with lower latency.*
 
+Select Review+Create. No need to change anything
+
 <img width="1027" height="517" alt="image" src="https://github.com/user-attachments/assets/30978f26-9bdf-48d0-9e44-7eca0d1193f1" />
+
+Here is what it should look like once created
+
+<img width="2233" height="1069" alt="image" src="https://github.com/user-attachments/assets/0aff1f43-5d88-4314-bc0d-caa7c7296684" />
+
 
 <ins>Step 3: Creation of <a href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network</a>
 
-</p>Since we are simulating a complete enviornment we need to create a Virtual Network as well.</p>
+</p>Since we are simulating a complete environment we need to create a Virtual Network as well.</p>
  <ul>
 <li>Think of this as a subnet for a home or office network, like a router gateway to connect you to the Internet.</li>
 <li>This will allow our VMs to plug into it just like a regular network.</li>
     </ul>
 
-Type in Virtual Networks on the search bar and when prompted, select the <B>Create Virtual Network<B> button
+Type in Virtual Networks on the search bar and when prompted, select the <B>Create Virtual Network<B> button.
 
-INSERT PICTURE
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20204032.png?raw=true)
 
 Next make sure the subscription stays the same and for the resource group choose the one you just created.
 
-INSERT PICTURE
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20201515.png?raw=true)
 
 After that you can skip the other sections and select Review+Create
+
+<img width="161" height="46" alt="image" src="https://github.com/user-attachments/assets/0c7c4b31-6629-4798-ab84-e954fb2a4bbf" />
+
 
 <ins>Step 4: Creation of <a href="https://azure.microsoft.com/en-us/products/virtual-machines">Virtual Machine</a>
 
