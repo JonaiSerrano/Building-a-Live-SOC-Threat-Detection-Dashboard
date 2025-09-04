@@ -114,7 +114,7 @@ Make sure to choose the correct subscription. You should only have one at this p
 
 *Ideally choose the same region for everything you create. Helps everything run smoother with lower latency.*
 
-Select Review+Create. No need to change anything
+Select *Review + Create*. No need to change anything
 
 <img width="1027" height="517" alt="image" src="https://github.com/user-attachments/assets/30978f26-9bdf-48d0-9e44-7eca0d1193f1" />
 
@@ -138,7 +138,7 @@ Next make sure the subscription stays the same and for the resource group choose
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20201515.png?raw=true)
 
-After that you can skip the other sections and select Review+Create
+After that you can skip the other sections and select *Review + Create*
 
 <img width="161" height="46" alt="image" src="https://github.com/user-attachments/assets/0c7c4b31-6629-4798-ab84-e954fb2a4bbf" />
 <hr>
@@ -191,7 +191,7 @@ Name this rule anything you want.
 
 After all this, we are in the clear!
 
-Click review and create. FIRE UP THE MACHINE!!!
+Click *Review + Create*. FIRE UP THE MACHINE!!!
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20231625.png?raw=true)
 <hr>
@@ -301,7 +301,7 @@ On Azure's homepage, search for *Log Analytics Workspaces*
 Make sure to create it with the same resource group you have been using
   - Name it however you like
 
-Press Review+Create
+Press *Review + Create*
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20001516.png?raw=true)
 
@@ -330,9 +330,48 @@ INSERT
 
 <ins>Step 10: Connecting VMs, Log Analytics Workspace, and Sentinel to work together</a>
 
-While inside Sentinel, navigate to the *Content Management* drop-down on the left and select *Content Hub*
-From there, search for "<b>Windows Security Events<b>" and install.
+Access Sentinel and navigate to the *Content Management* drop-down on the left.
+  - Select *Content Hub*
+
+Search for "Windows Security Events" and install.
   - Make sure that ALL the individual sections install!
+
+INSERT
+
+Once it installs, we are going to add a solution. 
+
+Click on the "Manage" button on the bottom right of the page.
+
+INSERT
+
+Once inside, click on "Windows Security Events via AMA"
+  - *This connection enables you to view dashboards, create custom alerts, and improve investigation.*
+
+Click "Open connector page"
+
+INSERT
+
+Select "Data Collection Rule"
+  - Used by the VM to forward logs into the Log Analytics Workspace, which in turn lets us use it in our SIEM.
+
+INSERT
+
+Choose whatever rule name your heart desires.
+  - *Make sure to choose the same Resource Group (Same old Same old)*
+
+INSERT
+
+Select your VM
+  - You might have to click "Azure subscription 1", then the name of your Resource group, and finally your VM
+
+INSERT
+
+On the "Collect" page you can leave it to collect "All Security Events"
+
+Finally, *Review + Create*
+
+
+
 
 Now you can simply go to search tab under the log workspace and view logs by clicking on logs> Then run a query according to the need. For example to view the failed attempts of login, we can simply do this query: SecurityEvent | where EventID == 4625
 
