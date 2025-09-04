@@ -256,286 +256,58 @@ To do that, we will once again open the remote desktop connection and enter the 
 
 
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/e8080fb0-3680-4394-b29c-c1b8570b5a10)
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20233729.png?raw=true)
 
 
+Try logging in with incorrect credentials
 
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20235202.png?raw=true)
 
 
+Now let's go back to the VM & refresh the security events on the event viewer to see if this attempt is logged. 
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20235302.png?raw=true)
 
 
+Here we can clearly see the audit failure. By clicking into it, we can get details of the IP address that attempted to access. 
+  - We will use this information later in our lab.
 
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20235622.png?raw=true)
 
+<hr>
 
-Now trying to login via wrong password.
 
+<ins>Step 7:<ins> Making the VM intentionally less secure to monitor potential attack attempts. <br />
 
+For this step, open the Start menu on the virtual machine and type <code>wf.msc</code> Click on Windows Defender Firewall Properties, then set the firewall state to Off.
+  - *I know it feels weird, but this ensures we will be absolutely vulnerable to outside attacks!*
+  - <b>Make sure to turn both private and public off.<b>
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20000345.png?raw=true)
 
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/fa3d38a3-85f3-4425-946f-08be2d398e79)
 
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20000351.png?raw=true)
+<hr>
 
 
+<ins>Step 8: Creating a<a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview">Log Analytic Workspace</a>
 
+On Azure, search for *Log Analytics Workspaces*
+  - <b>*This is a tool that allows you to easily store, retain, and most importantly, query data collected from selected environments in Azure*<b>
 
+Make sure to create it with the same resource group you have been using
+  - Name it however you like
 
+Press Review+Create
 
+![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20001516.png?raw=true)
 
+<ins>Step 9: Creating a<a href="https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-workspace-overview">Log Analytic Workspace</a>
 
 
-
-
-Now lets refresh the security events on the event viewer of virtual machine and see if this attempt is updated. 
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/be79296f-2f49-4d61-8af4-072caf532c7c)
-
-
-
-
-Here, we can see the audit failure. By double clicking it, we can even get the details of the IP address who tried to do this. This kind of information is what we are going to use to locate the attacker in the next step of our lab.
-
-
-
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/d7979c26-6738-49b7-9691-3ecf49ae64ae)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We can also find the IP address on the bottom of this detail section. The IP of an attacker who tried to login to this system.
-
-
-
-<ins>Step 8:<ins> Making Virtual Machine more vulnerable to collect more data of potential attackers. <br />
-
-For this step, we will be turning off the windows defender firewall. For that just type wf.msc in the start menu of the virtual machine. > click on Windows Defender Firewall Properties. And turn the firewall state off.
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/f52dca60-3a4a-4ad1-996d-1f6561ad33de)
-
-
-Also turn private and public profile also off.
-
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/f07fdd25-75e4-44ad-aa53-929e0d261494)
-
-
-
-
-
-
-
-
-<ins>Step 9:<ins> Powershell scrpting in Virtual machine <br />
-
-Powershell scripting to get information of security events Pass it to the API of geo location site and then use the output information from that site to put in Sentinel for graphic visualization of attacks.
-
-Here is the PowerShell Script to get API key from ipgeoloaction.io
-
-    # Get API key from here: https://ipgeolocation.io/
-
-    $API_KEY      = "d4600b4efdef42b39828f5155041a457"
-    $LOGFILE_NAME = "failed_rdp.log"
-    $LOGFILE_PATH = "C:\Users\$($LOGFILE_NAME)"
-
-    # This filter will be used to filter failed RDP events from Windows Event Viewer
-    $XMLFilter = @'
-    <QueryList> 
-       <Query Id="0" Path="Security">
-         <Select Path="Security">
-              *[System[(EventID='4625')]]
-          </Select>
-    </Query>
-    </QueryList> 
-    '@
-
-    <#
-    This function creates a bunch of sample log files that will be used to train the
-    Extract feature in Log Analytics workspace. If you don't have enough log files to
-    "train" it, it will fail to extract certain fields for some reason -_-.
-    We can avoid including these fake records on our map by filtering out all logs with
-    a destination host of "samplehost"
-    #>
-    Function write-Sample-Log() {
-    "latitude:47.91542,longitude:-120.60306,destinationhost:samplehost,username:fakeuser,sourcehost:24.16.97.222,state:Washington,country:United States,label:United States - 24.16.97.222,timestamp:2021-10-26 03:28:29" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:-22.90906,longitude:-47.06455,destinationhost:samplehost,username:lnwbaq,sourcehost:20.195.228.49,state:Sao Paulo,country:Brazil,label:Brazil - 20.195.228.49,timestamp:2021-10-26 05:46:20" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:52.37022,longitude:4.89517,destinationhost:samplehost,username:CSNYDER,sourcehost:89.248.165.74,state:North Holland,country:Netherlands,label:Netherlands - 89.248.165.74,timestamp:2021-10-26 06:12:56" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:40.71455,longitude:-74.00714,destinationhost:samplehost,username:ADMINISTRATOR,sourcehost:72.45.247.218,state:New York,country:United States,label:United States - 72.45.247.218,timestamp:2021-10-26 10:44:07" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:33.99762,longitude:-6.84737,destinationhost:samplehost,username:AZUREUSER,sourcehost:102.50.242.216,state:Rabat-Salé-Kénitra,country:Morocco,label:Morocco - 102.50.242.216,timestamp:2021-10-26 11:03:13" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:-5.32558,longitude:100.28595,destinationhost:samplehost,username:Test,sourcehost:42.1.62.34,state:Penang,country:Malaysia,label:Malaysia - 42.1.62.34,timestamp:2021-10-26 11:04:45" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:41.05722,longitude:28.84926,destinationhost:samplehost,username:AZUREUSER,sourcehost:176.235.196.111,state:Istanbul,country:Turkey,label:Turkey - 176.235.196.111,timestamp:2021-10-26 11:50:47" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:55.87925,longitude:37.54691,destinationhost:samplehost,username:Test,sourcehost:87.251.67.98,state:null,country:Russia,label:Russia - 87.251.67.98,timestamp:2021-10-26 12:13:45" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:52.37018,longitude:4.87324,destinationhost:samplehost,username:AZUREUSER,sourcehost:20.86.161.127,state:North Holland,country:Netherlands,label:Netherlands - 20.86.161.127,timestamp:2021-10-26 12:33:46" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:17.49163,longitude:-88.18704,destinationhost:samplehost,username:Test,sourcehost:45.227.254.8,state:null,country:Belize,label:Belize - 45.227.254.8,timestamp:2021-10-26 13:13:25" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    "latitude:-55.88802,longitude:37.65136,destinationhost:samplehost,username:Test,sourcehost:94.232.47.130,state:Central Federal District,country:Russia,label:Russia - 94.232.47.130,timestamp:2021-10-26 14:25:33" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-    }
-
-    # This block of code will create the log file if it doesn't already exist
-    if ((Test-Path $LOGFILE_PATH) -eq $false) {
-    New-Item -ItemType File -Path $LOGFILE_PATH
-    write-Sample-Log
-    }
-
-    # Infinite Loop that keeps checking the Event Viewer logs.
-    while ($true)
-    {
-    
-    Start-Sleep -Seconds 1
-    # This retrieves events from Windows EVent Viewer based on the filter
-    $events = Get-WinEvent -FilterXml $XMLFilter -ErrorAction SilentlyContinue
-    if ($Error) {
-        #Write-Host "No Failed Logons found. Re-run script when a login has failed."
-    }
-
-    # Step through each event collected, get geolocation
-    #    for the IP Address, and add new events to the custom log
-    foreach ($event in $events) {
-
-
-        # $event.properties[19] is the source IP address of the failed logon
-        # This if-statement will proceed if the IP address exists (>= 5 is arbitrary, just saying if it's not empty)
-        if ($event.properties[19].Value.Length -ge 5) {
-
-            # Pick out fields from the event. These will be inserted into our new custom log
-            $timestamp = $event.TimeCreated
-            $year = $event.TimeCreated.Year
-
-            $month = $event.TimeCreated.Month
-            if ("$($event.TimeCreated.Month)".Length -eq 1) {
-                $month = "0$($event.TimeCreated.Month)"
-            }
-
-            $day = $event.TimeCreated.Day
-            if ("$($event.TimeCreated.Day)".Length -eq 1) {
-                $day = "0$($event.TimeCreated.Day)"
-            }
-            
-            $hour = $event.TimeCreated.Hour
-            if ("$($event.TimeCreated.Hour)".Length -eq 1) {
-                $hour = "0$($event.TimeCreated.Hour)"
-            }
-
-            $minute = $event.TimeCreated.Minute
-            if ("$($event.TimeCreated.Minute)".Length -eq 1) {
-                $minute = "0$($event.TimeCreated.Minute)"
-            }
-
-
-            $second = $event.TimeCreated.Second
-            if ("$($event.TimeCreated.Second)".Length -eq 1) {
-                $second = "0$($event.TimeCreated.Second)"
-            }
-
-            $timestamp = "$($year)-$($month)-$($day) $($hour):$($minute):$($second)"
-            $eventId = $event.Id
-            $destinationHost = $event.MachineName# Workstation Name (Destination)
-            $username = $event.properties[5].Value # Account Name (Attempted Logon)
-            $sourceHost = $event.properties[11].Value # Workstation Name (Source)
-            $sourceIp = $event.properties[19].Value # IP Address
-        
-
-            # Get the current contents of the Log file!
-            $log_contents = Get-Content -Path $LOGFILE_PATH
-
-            # Do not write to the log file if the log already exists.
-            if (-Not ($log_contents -match "$($timestamp)") -or ($log_contents.Length -eq 0)) {
-            
-                # Announce the gathering of geolocation data and pause for a second as to not rate-limit the API
-                #Write-Host "Getting Latitude and Longitude from IP Address and writing to log" -ForegroundColor Yellow -BackgroundColor Black
-                Start-Sleep -Seconds 1
-
-                # Make web request to the geolocation API
-                # For more info: https://ipgeolocation.io/documentation/ip-geolocation-api.html
-                $API_ENDPOINT = "https://api.ipgeolocation.io/ipgeo?apiKey=$($API_KEY)&ip=$($sourceIp)"
-                $response = Invoke-WebRequest -UseBasicParsing -Uri $API_ENDPOINT
-
-                # Pull Data from the API response, and store them in variables
-                $responseData = $response.Content | ConvertFrom-Json
-                $latitude = $responseData.latitude
-                $longitude = $responseData.longitude
-                $state_prov = $responseData.state_prov
-                if ($state_prov -eq "") { $state_prov = "null" }
-                $country = $responseData.country_name
-                if ($country -eq "") {$country -eq "null"}
-
-                # Write all gathered data to the custom log file. It will look something like this:
-                #
-                "latitude:$($latitude),longitude:$($longitude),destinationhost:$($destinationHost),username:$($username),sourcehost:$($sourceIp),state:$($state_prov), country:$($country),label:$($country) - $($sourceIp),timestamp:$($timestamp)" | Out-File $LOGFILE_PATH -Append -Encoding utf8
-
-                Write-Host -BackgroundColor Black -ForegroundColor Magenta "latitude:$($latitude),longitude:$($longitude),destinationhost:$($destinationHost),username:$($username),sourcehost:$($sourceIp),state:$($state_prov),label:$($country) - $($sourceIp),timestamp:$($timestamp)"
-            }
-            else {
-                # Entry already exists in custom log file. Do nothing, optionally, remove the # from the line below for output
-                # Write-Host "Event already exists in the custom log. Skipping." -ForegroundColor Gray -BackgroundColor Black
-            }
-        }
-    }
-    }
-
-
-
-Then open the PowerShell ISE on your virtual machine from the start menu and then file new and paste this script. Save it on the desktop as log_export
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/d6fd8ad2-912b-4e01-a2c5-535153454c03)
-
-
-
-Now to get the API key, just go to the site:  https://ipgeolocation.io/
-
-Sign up and 
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/5e56227a-8e38-4364-bfeb-3591f1220da1)
-
-
-After signing up, we can see the dashboard of Developers where there will be an API key.
-
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/94104d3b-a11e-40a4-b062-4735ffcf81d8)
-
-
-
-
-
-
-
-
-We need to copy that API key and then paste it in the second line of our powershell script. Then again save the logexport file of desktop.
-
-This script will collect the login failed data pass the whole information to ipgeolocation and then gets the needed information to track an attacker and store those information in a file and then save it in the Users of c: of the virtual machine.
-
-We can see that by running the script and looking in the Users of C: of the virtual machine. We can try re login with false credentials, the file will get updated too.
-
-
-![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/5d18e6bd-3aac-4ee9-b8ae-37ff7508c2e8)
-
-
-<ins>Step 10:<ins> Creation of Custom Log under our Azure Log Analytic Workspace <br />
-
-Go to azure back again, go to log analytic work space and choose your workspace. SIEM in our case. And go to tables and then create sample log and then click create sample log. Choose MMA-based and then select the log file from your virtual machine. Since we are using our real machine to do this, we can copy and paste the content of our log file and save it in notepad of our own machine. To get the data. We need to save the file as failure.log.
 
 
 ![image](https://github.com/swopnilshakya7/Azure-Sentinel-SIEM-Mapping-Live-CyberAttacks/assets/140642619/62cc7960-6201-4ad3-afa1-63434d0e675a)
