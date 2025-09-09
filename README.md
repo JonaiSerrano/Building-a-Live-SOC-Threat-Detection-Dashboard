@@ -470,9 +470,9 @@ You have successfully mapped out alerts from failed login attempts - EventID == 
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-04%20015002.png?raw=true)
 
-The project is now successfully completed. We’ve set up a system that continuously monitors unauthorized login attempts to our virtual machine. Each failed access attempt is logged, allowing us to track and analyze the details—including identifying the geographic location of the source. This setup not only enhances visibility into potential threats but also provides valuable insights for strengthening future security measures.
+The project is now successfully completed. We’ve set up a system that continuously monitors unauthorized login attempts to our virtual machine. Each failed access attempt is logged, allowing us to track and analyze the details including identifying the geographic location of the source. This setup not only enhances visibility into potential threats but also provides valuable insights for strengthening future security measures.
 
-<h2>Step 15:<ins> "Optional" Deleting Resources (Don't go broke LOL)</a></h2><br />
+<h2>Step 15:<ins> "Optional" Deleting Resources (Don't go broke!)</a></h2><br />
 
 Now it's time to delete the resource group so you don’t end up turning your free $200 Azure credit into an accidental subscription plan. 
 
