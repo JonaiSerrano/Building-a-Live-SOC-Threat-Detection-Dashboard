@@ -3,24 +3,25 @@
 ![Screenshot](https://github.com/JonaiSerrano/Building-a-Live-Threat-Detection-Dashboard/blob/main/assets/Screenshot%202025-09-04%20015002.png?raw=true)
 
 <h2>Description</h2>
-This is a demonstration project showcasing live cyber attack tracking and visualization. It leverages IP addresses along with geolocation data (latitude and longitude) to identify and map the origin of unauthorized login attempts targeting a deliberately vulnerable machine. The system under observation is a Windows 10 Pro virtual machine hosted in the Azure Cloud. <br />
+This project demonstrates real-time tracking and visualization of cyber attacks by mapping unauthorized login attempts to their geographic origin using IP and geolocation data. The target system is a purposely vulnerable Windows 10 Pro VM hosted in Azure, designed to simulate threat activity in a controlled environment.
 
+<h2>Languages & Utilities Used</h2>
+<ul>
+  <li><b>PowerShell</b> – <i>scripting and automation</i></li>
+  <li><b>KQL</b> – <i>log querying in Microsoft Sentinel</i></li>
+  <li><b>JSON</b> – <i>data formatting and configuration</i></li>
+</ul>
 
-<h2>Languages and Utilities Used</h2>
-
-- <b>PowerShell</b> 
-- <b>KQL</b>
-- <b>JSON</b>
-
-<h2>Environments Used </h2>
-
-- <b>Windows 10 Pro N</b> (22H2 x64 Gen2)
-- <b>Azure</b>
-- <b>Microsoft Sentinel</b>
-- <b>Log Analytics workspaces</b>
-- <b>Windows Defender Firewall</b>
-- <b>Resource Manager</b>
-- <b>Event Viewer</b>
+<h2>Environments & Tools</h2>
+<ul>
+  <li><b>Windows 10 Pro N (22H2 x64 Gen2)</b> – <i>target virtual machine</i></li>
+  <li><b>Azure</b> – <i>cloud hosting and resource orchestration</i></li>
+  <li><b>Microsoft Sentinel</b> – <i>SIEM platform for threat detection</i></li>
+  <li><b>Log Analytics Workspace</b> – <i>centralized log collection and analysis</i></li>
+  <li><b>Windows Defender Firewall</b> – <i>endpoint protection and traffic control</i></li>
+  <li><b>Resource Manager</b> – <i>infrastructure provisioning and management</i></li>
+  <li><b>Event Viewer</b> – <i>local log inspection and event tracking</i></li>
+</ul>
 
 <h2>Setup Walk Through</h2>
 
