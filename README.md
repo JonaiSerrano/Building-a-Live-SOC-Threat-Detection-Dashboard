@@ -1,5 +1,7 @@
 # Azure Sentinel SIEM: Building a Live Threat Detection Dashboard
 
+![Screenshot](https://github.com/JonaiSerrano/Building-a-Live-Threat-Detection-Dashboard/blob/main/assets/Screenshot%202025-09-04%20015002.png?raw=true)
+
 <h2>Description</h2>
 This is a demonstration project showcasing live cyber attack tracking and visualization. It leverages IP addresses along with geolocation data (latitude and longitude) to identify and map the origin of unauthorized login attempts targeting a deliberately vulnerable machine. The system under observation is a Windows 10 Pro virtual machine hosted in the Azure Cloud. <br />
 
