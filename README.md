@@ -64,7 +64,7 @@ Then, in the search bar type: Resource Group.
 
 In Azure, a Resource Group is a logical grouping of resources that share the same lifespan. So everything we do in the lab will be under this unified group. It will make things easier to delete later.
 
-  - *<ins>An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
+  - *An Azure Resource Group is a logical container that holds and manages related cloud resources like virtual machines, databases, and storage so they can be deployed, monitored, and controlled as a unified unit.*
 
 ![image](https://github.com/JonaiSerrano/Designing_Azure_Sentinel_SIEM-Live-Attack-Map-Monitoring-/blob/main/assets/Screenshot%202025-09-03%20135618.png)
 
